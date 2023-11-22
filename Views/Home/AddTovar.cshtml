@@ -1,0 +1,24 @@
+﻿@model DB_Task.Models.TovarsModel
+@Html.ValidationSummary(true)
+@{
+    ViewData["Tittle"] = "Страница добавления";
+}
+
+<h2>Добавить товар</h2>
+@using (Html.BeginForm("AddTovar", "Home", FormMethod.Post))
+{
+    <div class="form-row">
+        <div class="m-3 form-group col-6">
+            @Html.LabelFor(m => m.Tittle, "Название товара:", new { @class = "mb-2" })
+            @Html.TextBoxFor(m => m.Tittle, new { type = "text", @class = "form-control", placeholder = "название" })
+            @Html.ValidationMessageFor(m => m.Tittle)
+        </div>
+        <div class="m-3 form-group col-md-6">
+            @Html.LabelFor(m => m.CategoryId, "Категория:", new { @class = "mb-2" })
+            @Html.DropDownListFor(model => model.CategoryId, (SelectList)ViewBag.category, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CategoryId)
+        </div>
+        <input type="submit" class="m-3 btn btn-primary mt-3" value="Добавить" />
+    </div>
+}
+

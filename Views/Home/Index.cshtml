@@ -1,0 +1,62 @@
+﻿@model DB_Task.ViewModel.TovarsViewModel
+<div class="row">
+    <div class="col-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Категория</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CategoryModels)
+                {
+                    if (Model.CategoryId == item.Id)
+                    {
+                        <tr class="table-active">
+                            <th scope="row">@item.Id</th>
+                            <td><a class="text-decoration-none text-black" href=@Url.ActionLink("Index", "Home", new { id = item.Id})>@item.Tittle</a></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <th scope="row">@item.Id</th>
+                            <td><a class="text-decoration-none text-black" href=@Url.ActionLink("Index", "Home", new { id = item.Id})>@item.Tittle</a></td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.CategoryId is not null)
+    {
+        <div class="col-7 offset-2">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Товар</th>
+                        <th scope="col">Категория</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TovarsModels)
+                    {
+                        <tr>
+                            <th scope="row">@item.Id</th>
+                            <td>@item.Tittle</td>
+                            <td>@item.Category.Tittle</td>
+                            <td align="center">
+                                @Html.ActionLink("Удалить", "DeleteTovar", "Home", new { tovarId = item.Id }, new { @class = "btn btn-light" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+<br />
